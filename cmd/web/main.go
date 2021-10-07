@@ -13,13 +13,15 @@ import (
 
 const portNumber = ":8080"
 
-var session *scs.SessionManager
 var app config.AppConfig
+var session *scs.SessionManager
 
+// main is the main function
 func main() {
-
+	// change this to true when in production
 	app.InProduction = false
 
+	// set up the session
 	session = scs.New()
 	session.Lifetime = 24 * time.Hour
 	session.Cookie.Persist = true
@@ -30,7 +32,7 @@ func main() {
 
 	tc, err := render.CreateTemplateCache()
 	if err != nil {
-		log.Fatal("cannot create temp cache")
+		log.Fatal("cannot create template cache")
 	}
 
 	app.TemplateCache = tc
